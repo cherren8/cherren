@@ -1,0 +1,68 @@
+## Tutorial for function `signed.mean`
+### Overview
+
+Author: Cristina Herren
+
+Purpose: This is a tutorial to accompany the function signed.mean in the package cherren. 
+
+```{r knitr_options, include=FALSE}
+library(knitr)
+opts_chunk$set(fig.width=12, fig.height=4, fig.path='RmdFigs/',
+               warning=FALSE, message=FALSE)
+```
+
+
+### Function Description
+
+The function signed.mean takes the arguments `vector` and `type`. The `vector` argument contains the entire set of values, both positive and negative. The `type` argument should be either `"pos"` or `"neg"`, depending on whether the returned average should be of the positive or negative values. 
+
+### Example of Function Utility
+
+I originally designed this function to take a vector of interaction strengths between different species and return the "average" positive or negative interaction strength between one species and all other species. Dividing by the total number of species interactions gave a good indicator of overall positive or negative interaction strength. This is the reason why the function divides the sum of all positive (or negative) values by the total length of the vector, rather than strictly averaging just the positive (or negative) values. 
+
+### Function Code
+
+```{r function_code}
+signed.mean <- 
+  function(vector, type){
+    if(type != "pos" & type != "neg"){break}
+    if(length(vector) == 0){break}
+    ifelse(type == "pos", vals <- vector[vector > 0], vals <- vector[vector < 0])
+    n.mean <- sum(vals) / length(vector)
+    return(n.mean)
+  }
+```
+
+### Using the Function
+
+First, generate a vector with mixed positive and negative values to send to the function. 
+
+```{r generate_vector}
+set.seed(509390770)
+vector <- floor(rnorm(10, 0, 5))
+```
+
+Note that the initial length of the vector:
+
+```{r length_vector}
+length(vector)
+```
+
+Send the vector to the function, along with either `"pos"` or `"neg"` as the argument `type`
+
+```{r use_fxn1}
+signed.mean(vector, type = "pos")
+signed.mean(vector, type = "neg")
+```
+
+Again, note that the returned value from the function run with `type = "pos"` gives `r signed.mean(vector, type = "pos")`. This is the sum of all positive values (`r sum(vector[vector>0])`) divided by the length of the original vector (`r length(vector)`).
+
+Similarly, the signed.mean function run with `type = "neg"` gives `r signed.mean(vector, type = "neg")`, which is the sum of all negative numbers in the vector (`r sum(vector[vector < 0])`) divided by the length of the original vector.
+
+
+### Happy coding! 
+
+
+
+
+

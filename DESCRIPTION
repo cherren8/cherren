@@ -1,0 +1,10 @@
+Package: cherren
+Version: 0.1
+Date: 4/30/2015
+Author: Cristina Herren <cherren@wisc.edu>
+Maintainer: Cristina Herren <cherren@wisc.edu>
+License: GPL-3
+Title: mean of signed values
+Suggests: testthat
+Description: take the average of positive or negative values in a vector
+URL: https://github.com/cherren8
